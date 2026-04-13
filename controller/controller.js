@@ -18,16 +18,16 @@ const fox2 = async (req, res) => {
   }
 };
 
-const votes = async (req, res) => {
+const score = async (req, res) => {
   const foxId = req.params.foxId;
   try {
     const fox = await Fox.findByIdAndUpdate(
       foxId,
-      { $inc: { votes: 1 } },
+      { $inc: { score: 1 } },
       { returnDocument: 'after' },
     );
 
-    res.json({ message: 'Vote recorded', votes: fox.votes });
+    res.json({ message: 'Vote recorded', score: fox.score });
   } catch (err) {
     console.log(err);
   }
@@ -50,9 +50,9 @@ async function fetchFox() {
 
     return fox;
   } catch (err) {
-    console.log('Error fatching fox', err);
+    console.log('Error fetching fox', err);
     throw err;
   }
 }
 
-module.exports = { fox1, fox2, votes };
+module.exports = { fox1, fox2, score };
