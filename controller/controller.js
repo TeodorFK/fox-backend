@@ -1,30 +1,42 @@
 const axios = require('axios');
 const Fox = require('../model/fox_model');
 
-const foxes = async (req, res) => {
-  const randomFox1 = await fetchFox();
-  const randomFox2 = await fetchFox();
-  res.json([randomFox1, randomFox2]);
+const fox1 = async (req, res) => {
+  try {
+    const randomFox1 = await fetchFox();
+    res.json(randomFox1);
+  } catch (err) {
+    res.json({ err: 'Failed to fetch fox' });
+  }
+};
+const fox2 = async (req, res) => {
+  try {
+    const randomFox2 = await fetchFox();
+    res.json(randomFox2);
+  } catch (err) {
+    res.json({ err: 'Failed to fetch fox' });
+  }
 };
 
 async function fetchFox() {
   try {
     const result = await axios.get('https://randomfox.ca/floof/');
-    const url = result.data.image;
+    const foxImage = result.data.image;
 
-    let fox = await fox.findOne({ url });
+    let fox = await Fox.findOne({ foxImage });
     if (!fox) {
       fox = new Fox({
-        url,
+        foxImage,
         score: 0,
       });
       await fox.save();
     }
 
-    return url;
+    return foxImage;
   } catch (err) {
     console.log('Error fatching fox', err);
+    throw err;
   }
 }
 
-module.exports = { foxes };
+module.exports = { fox1, fox2 };

@@ -3,7 +3,7 @@ const router = require('./routes/routes');
 const dbhandler = require('./config/db');
 const app = express();
 
-app.use(router);
+app.use('/', router);
 
 async function start() {
   await dbhandler.connectToDatabase('mongodb://10.12.5.13:27017/cute-fox');

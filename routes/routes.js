@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const controller = require('../controller/controller');
 
-router.get('/', controller.foxes);
+router.get('/fox1', controller.fox1);
+router.get('/fox2', controller.fox2);
 
 module.exports = router;

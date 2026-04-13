@@ -1,12 +1,13 @@
 const { Schema, model } = require('mongoose');
+const { type } = require('node:os');
 
 const foxSchema = new Schema({
-  url: {
+  foxImage: {
     type: String,
     required: true,
   },
   score: {
-    type: String,
+    type: Number,
     default: 0,
   },
 });
