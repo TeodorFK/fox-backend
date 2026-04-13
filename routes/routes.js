@@ -4,4 +4,6 @@ const controller = require('../controller/controller');
 router.get('/fox1', controller.fox1);
 router.get('/fox2', controller.fox2);
 
+router.post('votes/:foxId', controller.votes);
+
 module.exports = router;

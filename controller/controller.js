@@ -18,12 +18,28 @@ const fox2 = async (req, res) => {
   }
 };
 
+const votes = async (req, res) => {
+  const foxId = req.params.foxId;
+  try {
+    const fox = await Fox.findByIdAndUpdate(
+      foxId,
+      { $inc: { votes: 1 } },
+      { returnDocument: 'after' },
+    );
+
+    res.json({ message: 'Vote recorded', votes: fox.votes });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 async function fetchFox() {
   try {
     const result = await axios.get('https://randomfox.ca/floof/');
     const foxImage = result.data.image;
 
     let fox = await Fox.findOne({ foxImage });
+
     if (!fox) {
       fox = new Fox({
         foxImage,
@@ -32,11 +48,11 @@ async function fetchFox() {
       await fox.save();
     }
 
-    return foxImage;
+    return fox;
   } catch (err) {
     console.log('Error fatching fox', err);
     throw err;
   }
 }
 
-module.exports = { fox1, fox2 };
+module.exports = { fox1, fox2, votes };
