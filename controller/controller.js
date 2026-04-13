@@ -12,8 +12,14 @@ async function fetchFox() {
     const result = await axios.get('https://randomfox.ca/floof/');
     const url = result.data.image;
 
-    const fox = new Fox({ url });
-    await fox.save();
+    let fox = await fox.findOne({ url });
+    if (!fox) {
+      fox = new Fox({
+        url,
+        score: 0,
+      });
+      await fox.save();
+    }
 
     return url;
   } catch (err) {
