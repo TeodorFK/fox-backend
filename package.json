@@ -1,0 +1,26 @@
+{
+  "name": "fox-backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeodorFK/fox-backend.git"
+  },
+  "author": "TeodorFK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeodorFK/fox-backend/issues"
+  },
+  "homepage": "https://github.com/TeodorFK/fox-backend#readme",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.15.0",
+    "express": "^5.2.1",
+    "mongoose": "^9.4.1",
+    "nodemon": "^3.1.14"
+  }
+}
